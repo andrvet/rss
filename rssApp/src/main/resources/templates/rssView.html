@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>RSS Feed</title>
+</head>
+<body>
+    <h1>NY Times Technology RSS Feed</h1>
+    <ul>
+        <li th:each="item : ${rssItems}">
+            <h3 th:text="${item.title}"></h3>
+            <p th:text="${item.description}"></p>
+            <a th:href="${item.link}" target="_blank">Read more</a>
+        </li>
+    </ul>
+</body>
+</html>
