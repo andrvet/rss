@@ -9,6 +9,8 @@
         <li th:each="item : ${rssItems}">
             <h3 th:text="${item.title}"></h3>
             <p th:text="${item.description}"></p>
+            <img th:src="@{${item.image}}" width="100px" hight="100px">
+            <p></p>
             <a th:href="${item.link}" target="_blank">Read more</a>
         </li>
     </ul>

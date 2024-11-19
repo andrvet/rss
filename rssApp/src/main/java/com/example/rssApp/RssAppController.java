@@ -44,7 +44,13 @@ public class RssAppController {
                     String title = element.getElementsByTagName("title").item(0).getTextContent();
                     String link = element.getElementsByTagName("link").item(0).getTextContent();
                     String description = element.getElementsByTagName("description").item(0).getTextContent();
-                    items.add(new RssItem(title, link, description));
+
+                    String image = "";
+                    if (element.getElementsByTagName("media:content").getLength() > 0) {
+                        image = element.getElementsByTagName("media:content").item(0).getAttributes().getNamedItem("url").getTextContent();
+                    }
+                    
+                    items.add(new RssItem(title, link, description, image));
                 }
             }
         } catch (Exception e) {
@@ -58,11 +64,22 @@ public class RssAppController {
         private String title;
         private String link;
         private String description;
+        private String image;
+        
     
-        public RssItem(String title, String link, String description) {
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public RssItem(String title, String link, String description, String image) {
             this.title = title;
             this.link = link;
             this.description = description;
+            this.image = image;
         }
     
         // Getters
