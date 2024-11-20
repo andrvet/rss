@@ -7,6 +7,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
 @Controller
 public class RssAppController {
 
+
+
    @GetMapping("/")
+    @Scheduled(initialDelay = 0, fixedRate = 1000) 
     public String showFeed(Model model) {
         String RSS_FEED_URL = "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml";
         List<RssItem> rssItems = fetchRssFeed(RSS_FEED_URL);
