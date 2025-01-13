@@ -1,0 +1,22 @@
+<configuration>
+    <property name="ENV" value="${env:-production}" />
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <if condition='property("ENV").equals("production")'>
+            <then>
+                <!--json-->
+                <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                    <customFields>{"service":"${service:-rss}", "env":"${ENV}"}</customFields>
+                </encoder>
+            </then>
+            <else>
+                <!--raw -->
+                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                    <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+                </encoder>
+            </else>
+        </if>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>
